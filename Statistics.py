@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import Api as c_api
+import matplotlib.pyplot as mp
 
 class Statistics:
     """
@@ -91,8 +92,12 @@ class Statistics:
 
     def dataFrame(self):
         df = pd.DataFrame(self.statisticData, index=[x["symbol"] for x in self.api.getCoins()])
-        # print the data
-        print(df) 
+        mp.figure();
+
+        bp = df.boxplot()
+        bp.show()
+
+
 
 
 
