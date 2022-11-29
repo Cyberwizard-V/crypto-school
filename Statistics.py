@@ -10,7 +10,7 @@ class Statistics:
     def __init__(self) -> None:
         self.api = c_api.Api()
         self.allCoinData = self.getAllCoinData()
-        self.statisticData = {"AVG": [], "MIN": [], "MAX": [], "SD": [], "Q1": [], "Q2": [], "Q3": [],"IQR": [], "UPS": [], "DOWN": [], "LUP": [], "LDWN": [],}
+        self.statisticData = {"AVG": [], "MIN": [], "MAX": [], "SD": [], "Q1": [], "Q2": [], "Q3": [], "RNG": [],"IQR": [], "UPS": [], "DOWN": [], "LUP": [], "LDWN": [],}
 
         # create statistics
         self.getStatistics()
