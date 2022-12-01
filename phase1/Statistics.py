@@ -3,7 +3,7 @@ import numpy as np
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import Api as c_api
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as mp
 
 class Statistics:
     """
