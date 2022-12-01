@@ -14,8 +14,10 @@ class Api:
     def getAllCoinData(self):
         listCoin = self.getCoins()
         data = []
+        Currencies = ["ALB", "BHA", "CAS", "DUB", "ELG", "FAW"]
         for x in listCoin:
-            response = requests.get(f"https://api.basecampcrypto.nl/v1/coin/{x['symbol']}/history?key=" + self.API_KEY)
-            data.append(response.json())
+            if x['symbol'] in Currencies:
+                response = requests.get(f"https://api.basecampcrypto.nl/v1/coin/{x['symbol']}/history?key=" + self.API_KEY)
+                data.append(response.json())
         return data
     

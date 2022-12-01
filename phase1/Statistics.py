@@ -93,7 +93,8 @@ class Statistics:
         return longestDown
 
     def dataFrame(self):
-        df = pd.DataFrame(self.statisticData, index=[x["symbol"] for x in self.api.getCoins()])
+        Currencies = ["ALB", "BHA", "CAS", "DUB", "ELG", "FAW"]
+        df = pd.DataFrame(self.statisticData, index=[x["symbol"] for x in self.api.getCoins() if x["symbol"] in Currencies])
         # print the data frame
         print(df) 
 stats = Statistics()
