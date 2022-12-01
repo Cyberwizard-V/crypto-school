@@ -12,8 +12,14 @@ def main():
         investors[person] = inv.Investor(investors[person])
 
     # loop trough the objects
-    for person in investors:
+    c = c_api.Api()
 
+
+    for person in investors:
+        data = c.getSingleCoin(investors[person].currency["coin"])
+
+        coinData = [i["value"] for x in data for i in x['history']]
+        print(coinData)
         if person == "Alice":
             # BUY : when stock rate < 1500 SELL : when stock rate > 1600
             
@@ -40,13 +46,9 @@ def main():
             pass
 
 
-c = c_api.Api()
-data = c.getSingleCoin("FAW")
-for x in data:
-    for i in x['history']:
-        print(i['value'])
 
-print(c.getSingleCoin("FAW"))
+
+# print(c.getSingleCoin("FAW"))
 
 
 if __name__ == "__main__":
