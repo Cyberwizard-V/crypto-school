@@ -16,6 +16,7 @@ def main():
 
         if person == "Alice":
             # BUY : when stock rate < 1500 SELL : when stock rate > 1600
+            
             pass
 
         elif person == "Bob":
@@ -40,6 +41,11 @@ def main():
 
 
 c = c_api.Api()
+data = c.getSingleCoin("FAW")
+for x in data:
+    for i in x['history']:
+        print(i['value'])
+
 print(c.getSingleCoin("FAW"))
 
 
