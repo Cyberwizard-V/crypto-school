@@ -7,7 +7,7 @@ class Investor:
     def buyStock(self, stockRate: float) -> None:
         """ Buy stock rate with all the money """
         self.currency["amount"] = int(self.money / stockRate)
-        self.money =- self.money
+        self.money -= self.money
         return
 
     def sellStock(self, stockRate: float) -> None:
