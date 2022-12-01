@@ -1,6 +1,9 @@
 import pandas as pd
 import numpy as np
+import os, sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import Api as c_api
+import matplotlib.pyplot as plt
 
 class Statistics:
     """
@@ -91,12 +94,6 @@ class Statistics:
 
     def dataFrame(self):
         df = pd.DataFrame(self.statisticData, index=[x["symbol"] for x in self.api.getCoins()])
-        # print the data
+        # print the data frame
         print(df) 
-
-
-
-
-
-    pass
-test = Statistics()
+stats = Statistics()
