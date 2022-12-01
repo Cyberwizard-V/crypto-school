@@ -20,4 +20,9 @@ class Api:
                 response = requests.get(f"https://api.basecampcrypto.nl/v1/coin/{x['symbol']}/history?key=" + self.API_KEY)
                 data.append(response.json())
         return data
+
+    def getSingleCoin(self, coinName) -> int:
+        response = response = requests.get(f"https://api.basecampcrypto.nl/v1/coin/{coinName}/history?key=" + self.API_KEY)
+        response = response.json()
+        return response
     
