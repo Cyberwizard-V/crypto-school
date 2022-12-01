@@ -21,8 +21,25 @@ def main():
 
         if person == "Alice":
             # BUY : when stock rate < 1500 SELL : when stock rate > 1600
-            
-            pass
+            for x in coinData:
+                # BUY STOCK
+                if x < 1500:
+                    print("====================================")
+                    investors[person].buyStock(x)
+                    print("BUY: " , x)
+                    print('MONEY', investors[person].money)
+                    print('COINS' , investors[person].currency['amount'])
+                # SELL STOCK
+                elif x > 1600:
+                    print("====================================")
+                    investors[person].sellStock(x)
+                    print("SELL: " , x)
+                    print('MONEY' ,investors[person].money)
+                    print('COINS' ,investors[person].currency['amount'])
+                    print("====================================")
+
+            print(investors["Alice"].currency)
+            print(f'''Current money: {investors["Alice"].money}''')
 
         elif person == "Bob":
             # BUY : when stock rate < 1000 SELL : when stock rate > 1100

@@ -26,4 +26,3 @@ class Api:
         response = response = requests.get(f"https://api.basecampcrypto.nl/v1/coin/{coinName}/history?key=" + self.API_KEY)
         data.append(response.json())
         return data
-    

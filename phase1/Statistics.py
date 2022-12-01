@@ -13,7 +13,7 @@ class Statistics:
     def __init__(self) -> None:
         self.api = c_api.Api()
         self.allCoinData = self.getAllCoinData()
-        self.statisticData = {"AVG": [], "MIN": [], "MAX": [], "SD": [], "Q1": [], "Q2": [], "Q3": [],"IQR": [],"RNG - low" : [], "RNG - high" : [], "UPS": [], "DOWNS": [], "LUPS": [],"LDWN": [],}
+        self.statisticData = {"AVG": [], "MIN": [], "MAX": [], "SD": [], "Q1": [], "Q2": [], "Q3": [],"IQR": [],"RNG" : [], "UPS": [], "DOWNS": [], "LUPS": [],"LDWN": [],}
 
         # create statistics
         self.getStatistics()
@@ -39,20 +39,18 @@ class Statistics:
             IQR = Q3 - Q1
             # append coindata
             self.statisticData["AVG"].append(self.calculateAverage(coinData))
-            self.statisticData["MIN"].append(self.calculateAverage(min(coinData)))
-            self.statisticData["MAX"].append(self.calculateAverage(max(coinData)))
-            self.statisticData["SD"].append(self.calculateAverage(np.std(coinSD)))
-            self.statisticData["Q1"].append(self.calculateAverage(Q1))
-            self.statisticData["Q2"].append(self.calculateAverage(Q2))
-            self.statisticData["Q3"].append(self.calculateAverage(Q3))
-            self.statisticData["IQR"].append(self.calculateAverage(IQR))
-            self.statisticData["RNG - low"].append(self.calculateAverage(min(coinData)))
-            self.statisticData["RNG - high"].append(self.calculateAverage(max(coinData)))
+            self.statisticData["MIN"].append(min(coinData))
+            self.statisticData["MAX"].append(max(coinData))
+            self.statisticData["SD"].append(np.std(coinSD))
+            self.statisticData["Q1"].append(Q1)
+            self.statisticData["Q2"].append(Q2)
+            self.statisticData["Q3"].append(Q3)
+            self.statisticData["IQR"].append(IQR)
+            self.statisticData["RNG"].append(max(coinData) - min(coinData))
             self.statisticData["UPS"].append(self.calculateUps(coinData))
             self.statisticData["DOWNS"].append(self.calculateDowns(coinData))
             self.statisticData["LUPS"].append(self.calculateLongestUp(coinData))
             self.statisticData["LDWN"].append(self.calculateLongestDown(coinData))
-
 
 
     def calculateAverage(self, coinData: list):
