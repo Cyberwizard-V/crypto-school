@@ -17,9 +17,8 @@ def main():
 
     for person in investors:
         data = c.getSingleCoin(investors[person].currency["coin"])
-
         coinData = [i["value"] for x in data for i in x['history']]
-        print(coinData)
+
         if person == "Alice":
             # BUY : when stock rate < 1500 SELL : when stock rate > 1600
             
