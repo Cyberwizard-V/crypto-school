@@ -1,7 +1,8 @@
 
 class Investor:
     def __init__(self, coin) -> None:
-        self.money = 10000000
+        self.money = 1000000
+
         self.currency = {"coin": coin, "amount": 0} 
 
     def buyStock(self, stockRate: float) -> None:

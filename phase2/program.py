@@ -2,9 +2,9 @@ import os, sys
 import Investor as inv
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import Api as c_api
+global Trades
 
 def main():
-
     # create an object for every person
     investors = {"Alice": "ALB", "Bob": "BHA", "Carol": "CAS", "Dave": "DUB", "Eve": "ELG", "Frank": "FAW"}
     for person in investors:
@@ -22,16 +22,22 @@ def main():
             # BUY : when stock rate < 1500 SELL : when stock rate > 1600
             for x in coinData:
                 # BUY STOCK
-                if x < 1500:
+                if x < 1500 and investors[person].money > 0:
+                    print("Alice - TRADER")
                     print("====================================")
+                    print('MONEY BEFORE BUY', investors[person].money)
                     investors[person].buyStock(x)
                     print("BUY: " , x)
                     print('MONEY', investors[person].money)
                     print('COINS' , investors[person].currency['amount'])
-                # SELL STOCK
-                elif x > 1600:
                     print("====================================")
-                    investors[person].sellStock(x)
+
+                # SELL STOCK
+                elif x > 1600 and investors[person].currency['amount'] > 0:
+                    print("Alice - TRADER")
+                    print("====================================")
+                    print('MONEY BEFORE SELL', investors[person].money)
+                    print(investors[person].sellStock(x))
                     print("SELL: " , x)
                     print('MONEY' ,investors[person].money)
                     print('COINS' ,investors[person].currency['amount'])
@@ -39,10 +45,33 @@ def main():
 
             print(investors["Alice"].currency)
             print(f'''Current money: {investors["Alice"].money}''')
-
         elif person == "Bob":
             # BUY : when stock rate < 1000 SELL : when stock rate > 1100
-            pass
+
+            for x in coinData:
+            # BUY STOCK
+                if x < 1000 and investors[person].money > 0:
+                    print("Bob - TRADER")
+                    print("====================================")
+                    print('MONEY BEFORE BUY', investors[person].money)
+                    investors[person].buyStock(x)
+                    print("BUY: " , x)
+                    print('MONEY', investors[person].money)
+                    print('COINS' , investors[person].currency['amount'])
+                    print("====================================")
+
+                # SELL STOCK
+                elif x > 1100 and investors[person].currency['amount'] > 0:
+                    print("Bob - TRADER")
+                    print("====================================")
+                    print('MONEY BEFORE SELL', investors[person].money)
+                    print(investors[person].sellStock(x))
+                    print("SELL: " , x)
+                    print('MONEY' ,investors[person].money)
+                    print('COINS' ,investors[person].currency['amount'])
+                    print("====================================")
+            print(investors["Bob"].currency)
+            print(f'''Current money: {investors["Bob"].money}''')
 
         elif person == "Carol":
             # BUY : when stock rate reaches valley (how do you detect a valley?) SELL : when stock rate reaches top (how do you detect a top?)
