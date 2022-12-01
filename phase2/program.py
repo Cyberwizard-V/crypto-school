@@ -4,7 +4,6 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import Api as c_api
 
 def main():
-    fakeCoin = {"SWA": [100,50,120,123,231,536,123]}
 
     # create an object for every person
     investors = {"Alice": "ALB", "Bob": "BHA", "Carol": "CAS", "Dave": "DUB", "Eve": "ELG", "Frank": "FAW"}
@@ -34,15 +33,47 @@ def main():
 
         elif person == "Dave":
             # BUY : after three days of decreasing rates SELL : after three days of increasing rates
-            pass
+            count = 0
+            for Stockrate in range(0, len(coinData)):
+                if count == 3:
+                    if rate == "decreasing":
+                        investors[person].buyStock(coinData[Stockrate])
+                    elif rate == "increasing":
+                        investors[person].sellStock(coinData[Stockrate])
+                    count = 0
+                if coinData[Stockrate] < coinData[Stockrate-1]:
+                    count += 1
+                    rate = "decreasing"
+                elif coinData[Stockrate] > coinData[Stockrate-1]:
+                    count += 1
+                    rate = "increasing"
+                else:
+                    count = 0
 
         elif person == "Eve":
             # BUY : on day 1, 11, 21, 31, 41 , etc SELL : on day 5, 15, 25, 35, 45, etc
-            pass
+            buyDays = [x for x in range(1,len(coinData), 10)]
+            sellDays = [x for x in range(5, len(coinData), 10)]
+
+            for day in range(0,len(coinData)):
+                if day in buyDays:
+                    investors[person].buyStock(coinData[day])
+                elif day in sellDays:
+                    investors[person].sellStock(coinData[Stockrate])
 
         elif person == "Frank":
             # BUY : at day 1 and repeat: SELL : after an increase of 20% BUY again: after a decrease of 20%
-            pass
+            investors[person].buyStock(coinData[0])
+            measureStock = coinData[0]
+            for stockRate in range(1, len(coinData)):
+                # Sell stocks
+                if measureStock * 1.20 == coinData[stockRate]:
+                    investors[person].sellStock(coinData[stockRate])
+                    measureStock = coinData[stockRate]
+                # Buy stocks
+                elif measureStock * 0.80 == coinData[stockRate]:
+                    investors[person].buyStock(coinData[stockRate])
+                    measureStock = coinData[stockRate]
 
 
 
