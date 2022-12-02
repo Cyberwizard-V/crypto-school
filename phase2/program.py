@@ -22,7 +22,7 @@ def main():
             # BUY : when stock rate < 1500 SELL : when stock rate > 1600
             for x in coinData:
                 # BUY STOCK
-                if x < 1500 and investors[person].money > 0:
+                if x < 1500 and investors[person].currency['amount'] == 0:
                     print("Alice - TRADER")
                     print("====================================")
                     print('MONEY BEFORE BUY', investors[person].money)
@@ -47,10 +47,9 @@ def main():
             print(f'''Current money: {investors["Alice"].money}''')
         elif person == "Bob":
             # BUY : when stock rate < 1000 SELL : when stock rate > 1100
-
             for x in coinData:
             # BUY STOCK
-                if x < 1000 and investors[person].money > 0:
+                if x < 1000 and investors[person].currency['amount'] == 0:
                     print("Bob - TRADER")
                     print("====================================")
                     print('MONEY BEFORE BUY', investors[person].money)
