@@ -3,7 +3,7 @@ import numpy as np
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import Api as c_api
-import matplotlib.pyplot as mp
+import matplotlib.pyplot as plt
 
 class Statistics:
     """
@@ -94,5 +94,43 @@ class Statistics:
         Currencies = ["ALB", "BHA", "CAS", "DUB", "ELG", "FAW"]
         df = pd.DataFrame(self.statisticData, index=[x["symbol"] for x in self.api.getCoins() if x["symbol"] in Currencies])
         # print the data frame
-        print(df) 
-stats = Statistics()
+        print(df)
+        
+    def line_graph(self):
+        count = 1
+        for x in self.getAllCoinData():
+            days = [z['day'] for z in x['history']]
+            value = [z['value'] for z in x['history']]
+            plt.subplot(2, 3, count)
+            plt.plot(days, value)
+            plt.xlabel('Days')
+            plt.ylabel('Values')
+            plt.title(x["symbol"])
+            count += 1
+        plt.show()
+    
+    def boxplot(self):
+        count = 1
+        for x in self.getAllCoinData():
+            value = [z['value'] for z in x['history']]
+            plt.subplot(2, 3, count)
+            plt.boxplot(value)
+            plt.title(x["symbol"])
+            count += 1
+        plt.show()
+
+    def histogram(self):
+        count = 1
+        for x in self.getAllCoinData():
+            value = [z['value'] for z in x['history']]
+            plt.subplot(2, 3, count)
+            plt.hist(value, bins= 25, edgecolor="black")
+            plt.xlabel('Price')
+            plt.ylabel('Count')
+            plt.title(x["symbol"])
+            count += 1
+        plt.show()
+        
+#stats = Statistics().line_graph()
+stats = Statistics().boxplot()
+#stats = Statistics().histogram()
