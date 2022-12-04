@@ -45,7 +45,7 @@ def main():
 
                     # loop trough the objects
                 c = c_api.Api()
-            for person in investors:
+                for person in investors:
                     data = c.getSingleCoin(investors[person].currency["coin"])
                     coinData = [i["value"] for x in data for i in x['history']]
 
