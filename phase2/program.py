@@ -86,21 +86,23 @@ def main():
         elif person == "Dave":
             # BUY : after three days of decreasing rates SELL : after three days of increasing rates
             count = 0
+            increasing, decreasing = 0, 0
             for Stockrate in range(0, len(coinData)):
-                if count == 3:
-                    if rate == "decreasing":
-                        investors[person].buyStock(coinData[Stockrate])
-                    elif rate == "increasing":
-                        investors[person].sellStock(coinData[Stockrate])
-                    count = 0
+                if increasing == 3:
+                    investors[person].sellStock(coinData[Stockrate])
+                    increasing, decreasing = 0, 0
+                elif increasing == 3:
+                    investors[person].buyStock(coinData[Stockrate])
+                    increasing, decreasing = 0, 0
+
                 if coinData[Stockrate] < coinData[Stockrate-1]:
-                    count += 1
-                    rate = "decreasing"
+                    decreasing += 1
+                    increasing = 0
                 elif coinData[Stockrate] > coinData[Stockrate-1]:
-                    count += 1
-                    rate = "increasing"
+                    increasing += 1
+                    decreasing = 0
                 else:
-                    count = 0
+                    increasing, decreasing = 0, 0
 
         elif person == "Eve":
             # BUY : on day 1, 11, 21, 31, 41 , etc SELL : on day 5, 15, 25, 35, 45, etc
