@@ -74,7 +74,14 @@ def main():
 
         elif person == "Carol":
             # BUY : when stock rate reaches valley (how do you detect a valley?) SELL : when stock rate reaches top (how do you detect a top?)
-            pass
+            canBuy = True
+            for stockRate in range(0,len(coinData)):
+                if coinData[stockRate - 2] > coinData[stockRate -1]  < coinData[stockRate] and canBuy is True:
+                    investors[person].buyStock(coinData[stockRate])
+                    canBuy = False
+                elif coinData[stockRate - 2] < coinData[stockRate - 1] > coinData[stockRate] and canBuy is False:
+                    investors[person].sellStock(coinData[stockRate])
+                    canBuy = True
 
         elif person == "Dave":
             # BUY : after three days of decreasing rates SELL : after three days of increasing rates
@@ -112,11 +119,11 @@ def main():
             measureStock = coinData[0]
             for stockRate in range(1, len(coinData)):
                 # Sell stocks
-                if measureStock * 1.20 == coinData[stockRate]:
+                if measureStock * 1.20 >= coinData[stockRate]:
                     investors[person].sellStock(coinData[stockRate])
                     measureStock = coinData[stockRate]
                 # Buy stocks
-                elif measureStock * 0.80 == coinData[stockRate]:
+                elif measureStock * 0.80 <= coinData[stockRate]:
                     investors[person].buyStock(coinData[stockRate])
                     measureStock = coinData[stockRate]
 
