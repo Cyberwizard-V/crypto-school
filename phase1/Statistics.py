@@ -16,15 +16,16 @@ class Statistics:
         self.statisticData = {"AVG": [], "MIN": [], "MAX": [], "SD": [], "Q1": [], "Q2": [], "Q3": [],"IQR": [],"RNG" : [], "UPS": [], "DOWNS": [], "LUPS": [],"LDWN": [],}
 
         # create statistics
-        self.getStatistics()
+        # self.getStatistics()
 
         # load dataframe
-        self.dataFrame()
+        # self.dataFrame()
 
     def getAllCoinData(self):
         return self.api.getAllCoinData()
 
     def getStatistics(self):
+        X = {"AVG": [], "MIN": [], "MAX": [], "SD": [], "Q1": [], "Q2": [], "Q3": [],"IQR": [],"RNG" : [], "UPS": [], "DOWNS": [], "LUPS": [],"LDWN": [],}
         for x in range(0, len(self.allCoinData)):
             coinData = [val["value"] for val in self.allCoinData[x]["history"]]
             coinSD = np.array([coinData])
@@ -38,19 +39,22 @@ class Statistics:
             # Interquaritle range (IQR)
             IQR = Q3 - Q1
             # append coindata
-            self.statisticData["AVG"].append(self.calculateAverage(coinData))
-            self.statisticData["MIN"].append(min(coinData))
-            self.statisticData["MAX"].append(max(coinData))
-            self.statisticData["SD"].append(np.std(coinSD))
-            self.statisticData["Q1"].append(Q1)
-            self.statisticData["Q2"].append(Q2)
-            self.statisticData["Q3"].append(Q3)
-            self.statisticData["IQR"].append(IQR)
-            self.statisticData["RNG"].append(max(coinData) - min(coinData))
-            self.statisticData["UPS"].append(self.calculateUps(coinData))
-            self.statisticData["DOWNS"].append(self.calculateDowns(coinData))
-            self.statisticData["LUPS"].append(self.calculateLongestUp(coinData))
-            self.statisticData["LDWN"].append(self.calculateLongestDown(coinData))
+            X["AVG"].append(self.calculateAverage(coinData))
+            X["MIN"].append(min(coinData))
+            X["MAX"].append(max(coinData))
+            X["SD"].append(np.std(coinSD))
+            X["Q1"].append(Q1)
+            X["Q2"].append(Q2)
+            X["Q3"].append(Q3)
+            X["IQR"].append(IQR)
+            X["RNG"].append(max(coinData) - min(coinData))
+            X["UPS"].append(self.calculateUps(coinData))
+            X["DOWNS"].append(self.calculateDowns(coinData))
+            X["LUPS"].append(self.calculateLongestUp(coinData))
+            X["LDWN"].append(self.calculateLongestDown(coinData))
+            
+            
+        return X
 
 
     def calculateAverage(self, coinData: list):
@@ -90,9 +94,9 @@ class Statistics:
                 currentSequence = 0
         return longestDown
 
-    def dataFrame(self):
+    def dataFrame(self, data):
         Currencies = ["ALB", "BHA", "CAS", "DUB", "ELG", "FAW"]
-        df = pd.DataFrame(self.statisticData, index=[x["symbol"] for x in self.api.getCoins() if x["symbol"] in Currencies])
+        df = pd.DataFrame(data, index=[x["symbol"] for x in self.api.getCoins() if x["symbol"] in Currencies])
         # print the data frame
         print(df)
         
@@ -131,6 +135,6 @@ class Statistics:
             count += 1
         plt.show()
         
-#stats = Statistics().line_graph()
-stats = Statistics().boxplot()
-#stats = Statistics().histogram()
+# #stats = Statistics().line_graph()
+# stats = Statistics().boxplot()
+# #stats = Statistics().histogram()
