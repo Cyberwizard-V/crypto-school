@@ -19,14 +19,11 @@ def main():
 
     # Up - Sell
     percentage = 0.10
-
-    encounters = 0
     if (coinData[-1] * (1 + percentage) ) >= coinData[-2]:
         pass
     # Dip - Buy
     elif (coinData[-1] * (1 - percentage) ) <= coinData[-2]:
         pass
-    else:
 
 
 
