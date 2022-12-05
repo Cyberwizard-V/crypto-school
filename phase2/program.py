@@ -57,7 +57,7 @@ def main():
                                 investors[person].buyStock(x)
                             # SELL STOCK
                             elif x > 1600 and investors[person].currency['amount'] > 0:
-                                print(investors[person].sellStock(x))
+                                investors[person].sellStock(x)
                         print("Alice - TRADER")
                         print(investors["Alice"].currency)
                         print(f'''Current money: {investors["Alice"].money}''')
@@ -70,9 +70,7 @@ def main():
 
                             # SELL STOCK
                             elif x > 1100 and investors[person].currency['amount'] > 0:
-                                print('MONEY BEFORE SELL', investors[person].money)
-                                print(investors[person].sellStock(x))
-                                print("SELL: " , x)
+                                investors[person].sellStock(x)
                         print("Bob - TRADER")
                         print(investors["Bob"].currency)
                         print(f'''Current money: {investors["Bob"].money}''')
