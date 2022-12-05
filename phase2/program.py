@@ -146,7 +146,8 @@ def main():
                         print("Frank - TRADER")
                         print(investors["Frank"].currency)
                         print(f'''Current money: {investors["Frank"].money}''')
-                        
+            elif getInput == "Z":
+                quit()
 
 if __name__ == "__main__":
     main()
